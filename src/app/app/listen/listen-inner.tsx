@@ -7,13 +7,6 @@ import Link from "next/link";
 import { Mic, MicOff, Zap } from "lucide-react";
 import { AppPageHeader } from "@/components/app-page-header";
 
-declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
-  }
-}
-
 interface Props {
   rules: TriggerRule[];
   userId: string;

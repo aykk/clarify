@@ -2,13 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
-declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
-  }
-}
-
 interface VoiceSectionProps {
   phone: string;
   trigger: string;
