@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Lifeline",
-  description: "Say the word. We make the call.",
+  description: "Say the word. Lifeline makes the call.",
 };
 
 export default function RootLayout({

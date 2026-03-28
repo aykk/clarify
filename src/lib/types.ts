@@ -3,7 +3,10 @@ export interface TriggerRule {
   user_id: string;
   name: string;
   trigger_phrase: string;
+  /** First number; kept for legacy rows and NOT NULL schemas. */
   phone_number: string;
+  /** All numbers to call when the trigger fires (parallel outbound calls). */
+  phone_numbers?: string[] | null;
   message: string;
   include_location: boolean;
   created_at: string;

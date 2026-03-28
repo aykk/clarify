@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import DashboardHelp from "@/components/dashboard-help";
 import Sidebar from "./sidebar";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
@@ -11,6 +12,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen flex bg-[var(--lifeline-canvas)] text-zinc-900">
       <Sidebar user={user} />
       <main className="app-main-panel">{children}</main>
+      <DashboardHelp />
     </div>
   );
 }

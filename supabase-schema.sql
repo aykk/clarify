@@ -6,6 +6,7 @@ create table if not exists trigger_rules (
   name text not null,
   trigger_phrase text not null,
   phone_number text not null,
+  phone_numbers jsonb,
   message text not null,
   created_at timestamptz default now()
 );

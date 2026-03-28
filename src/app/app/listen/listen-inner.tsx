@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { TriggerRule } from "@/lib/types";
+import { ruleDestinationNumbers } from "@/lib/phone-numbers";
 import Link from "next/link";
 import { Mic, MicOff, Zap } from "lucide-react";
 import { AppPageHeader } from "@/components/app-page-header";
@@ -31,6 +32,8 @@ export default function ListenInner({ rules, userId }: Props) {
 
   const fireRule = useCallback(async (rule: TriggerRule) => {
     if (cooldownRef.current.has(rule.id)) return;
+    const numbers = ruleDestinationNumbers(rule);
+    if (numbers.length === 0) return;
     cooldownRef.current.add(rule.id);
     setStatuses((s) => ({ ...s, [rule.id]: "calling" }));
 
@@ -58,13 +61,14 @@ export default function ListenInner({ rules, userId }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          phone_number: rule.phone_number,
+          phone_numbers: numbers,
           message: rule.message + locationSuffix,
           trigger_phrase: rule.trigger_phrase,
           user_id: userId,
         }),
       });
-      const success = res.ok;
+      const data = (await res.json().catch(() => ({}))) as { success?: boolean };
+      const success = res.ok && (data.success === undefined ? true : data.success === true);
       setStatuses((s) => ({ ...s, [rule.id]: success ? "done" : "error" }));
       setLog((l) => [{ rule: rule.name, time: new Date().toLocaleTimeString(), success }, ...l]);
     } catch {
@@ -205,7 +209,9 @@ export default function ListenInner({ rules, userId }: Props) {
                             &ldquo;{rule.trigger_phrase}&rdquo;
                           </span>
                         </div>
-                        <span className="text-xs text-zinc-400 truncate">→ {rule.phone_number}</span>
+                        <span className="text-xs text-zinc-400 truncate">
+                          → {ruleDestinationNumbers(rule).join(", ")}
+                        </span>
                       </div>
                     </div>
                     {s && (

@@ -49,9 +49,9 @@ export default function LoginPage() {
         <div className="flex flex-col gap-3">
           <Link
             href="/"
-            className="text-sm font-semibold tracking-tight text-zinc-900 hover:opacity-75 transition-opacity w-fit"
+            className="text-sm font-semibold tracking-tight text-[var(--lifeline-accent)] hover:opacity-80 transition-opacity w-fit"
           >
-            lifeline.
+            Lifeline.
           </Link>
           <p className="lifeline-section-label">Account</p>
           <h1 className="text-2xl font-semibold tracking-tight text-zinc-900">Sign in</h1>

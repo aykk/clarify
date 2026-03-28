@@ -133,10 +133,11 @@
   }
   html {
     @apply font-sans;
+    scroll-padding-top: 7.5rem;
   }
 }
 
-/* Landing: hairline section rule (visually thinner than 0.5px borders) */
+/* Landing: thin rule between sections */
 .section-hairline-b {
   position: relative;
 }
@@ -147,19 +148,27 @@
   right: 0;
   bottom: 0;
   height: 1px;
-  background: color-mix(in srgb, var(--lifeline-ink) 88%, transparent);
-  transform: scaleY(0.18);
-  transform-origin: bottom center;
+  background: #000;
   pointer-events: none;
+  z-index: 10;
 }
 
-/* Marketing hero: soft depth without clutter */
+/* Marketing hero: soft depth (no section-to-section gradient bands) */
 .lifeline-hero-field {
   background-color: var(--lifeline-canvas);
   background-image:
-    radial-gradient(ellipse 95% 70% at 50% 100%, var(--lifeline-accent-soft), transparent 58%),
-    radial-gradient(ellipse 55% 50% at 0% 0%, rgba(0, 0, 0, 0.028), transparent 55%),
-    radial-gradient(ellipse 50% 45% at 100% 15%, rgba(15, 107, 99, 0.05), transparent 50%);
+    radial-gradient(ellipse 118% 82% at 50% 100%, color-mix(in srgb, var(--lifeline-accent) 11%, transparent), transparent 64%),
+    radial-gradient(ellipse 72% 62% at 0% 0%, rgba(0, 0, 0, 0.028), transparent 58%),
+    radial-gradient(ellipse 62% 54% at 100% 10%, color-mix(in srgb, var(--lifeline-accent) 7%, transparent), transparent 54%);
+}
+
+/* Translucent brand tint behind key phrases (marketing) */
+.lifeline-text-highlight {
+  background: color-mix(in srgb, var(--lifeline-accent) 17%, transparent);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.06em 0.28em;
+  border-radius: 0.2em;
 }
 
 /* Eyebrow with accent pulse (hero, key CTAs) */
